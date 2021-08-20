@@ -10,6 +10,14 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title', 'body', 'is_public', 'published_at'
+    ];
+
+    protected $casts = [
+        'is_public' => 'bool',
+        'published_at' => 'datetime'
+    ];
 
     /**
      * 公開のみ表示

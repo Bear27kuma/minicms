@@ -1,8 +1,8 @@
 <?php
-/**
- * @var Illuminate\Pagination\LengthAwarePaginator|\App\Models\Post[] $posts
- */
-$title = '投稿一覧';
+    /**
+     * @var Illuminate\Pagination\LengthAwarePaginator|\App\Models\Post[] $posts
+     */
+    $title = '投稿一覧';
 ?>
 @extends('front.layouts.base')
 

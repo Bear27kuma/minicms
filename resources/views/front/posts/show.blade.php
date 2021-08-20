@@ -1,7 +1,7 @@
 <?php
-/**
- * @var \App\Models\Post $post
- */
+    /**
+     * @var \App\Models\Post $post
+     */
 $title = '投稿詳細';
 ?>
 @extends('front.layouts.base')

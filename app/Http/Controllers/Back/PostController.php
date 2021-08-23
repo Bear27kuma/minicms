@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 
@@ -76,13 +77,21 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  PostRequest  $request
+     * @param  Post $post
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, Post $post)
     {
-        //
+        if ($post->update($request->all())) {
+            $flash = ['success' => 'データを更新しました。'];
+        } else {
+            $flash = ['error' => 'データの更新に失敗しました。'];
+        }
+
+        return redirect()
+            ->route('back.posts.edit', $post)
+            ->with($flash);
     }
 
     /**

@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest('id')->paginate(20);
+        $posts = Post::with('user')->latest('id')->paginate(20);
         return view('back.posts.index', compact('posts'));
     }
 
@@ -69,7 +69,7 @@ class PostController extends Controller
      * @param  Post $post
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit($post)
+    public function edit(Post $post)
     {
         return view('back.posts.edit', compact('post'));
     }

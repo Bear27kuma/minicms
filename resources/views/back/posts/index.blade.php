@@ -41,7 +41,7 @@
                                     'onclick' => "return confirm('本当に削除しますか？')",
                                     'class' => 'btn btn-danger btn-sm m-1'
                                 ]) }}
-                                {{ From::close() }}
+                                {{ Form::close() }}
                             </td>
                         </tr>
                     @endforeach

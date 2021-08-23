@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Back;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -32,12 +33,22 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  PostRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        $post = Post::create($request->all());
+
+        if ($post) {
+            return redirect()
+                ->route('back.posts.edit', $post)
+                ->withSuccess('データを登録しました。');
+        } else {
+            return redirect()
+                ->route('back.posts.create')
+                ->withError('データの登録に失敗しました。');
+        }
     }
 
     /**

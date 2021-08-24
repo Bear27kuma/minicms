@@ -64,8 +64,14 @@ class Post extends Model
      * @param Builder $query
      * @return mixed
      */
-    public function scopePublicList(Builder $query)
+    public function scopePublicList(Builder $query, string $tagSlug = null)
     {
+        if ($tagSlug) {
+            $query->whereHas('tags', function ($query) use ($tagSlug) {
+                $query->where('slug', $tagSlug);
+            });
+        }
+
         return $query
             ->public()
             ->latest('published_at')

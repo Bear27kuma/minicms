@@ -42,6 +42,8 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $post = Post::create($request->all());
+        // タグを追加
+        $post->tags()->attach($request->tags);
 
         if ($post) {
             return redirect()
@@ -86,6 +88,8 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
+        // タグを更新
+        $post->tags()->sync($request->tags);
         if ($post->update($request->all())) {
             $flash = ['success' => 'データを更新しました。'];
         } else {
@@ -106,6 +110,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        // タグを削除
+        $post->tags()->detach();
+
         if ($post->delete()) {
             $flash = ['success' => 'データを削除しました。'];
         } else {

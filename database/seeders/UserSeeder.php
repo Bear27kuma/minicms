@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
                 'email' => 'admin@example.com',
                 'email_verified_at' => now(),
                 'password' => \Hash::make('123456789'),
+                'role' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -27,6 +28,7 @@ class UserSeeder extends Seeder
                 'email' => 'maeda@example.com',
                 'email_verified_at' => now(),
                 'password' => \Hash::make('123456789'),
+                'role' => 2,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -35,6 +37,7 @@ class UserSeeder extends Seeder
                 'email' => 'yamaguchi@example.com',
                 'email_verified_at' => now(),
                 'password' => \Hash::make('123456789'),
+                'role' => 2,
                 'created_at' => now(),
                 'updated_at' => now()
             ]

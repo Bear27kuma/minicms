@@ -21,7 +21,14 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a href="{{ route('back.dashboard') }}" class="nav-link">ダッシュボード</a></li>
+                        <li class="nav-item">
+                            <a href="{{ route('back.dashboard') }}" class="nav-link">ダッシュボード</a>
+                        </li>
+                        @can('admin')
+                            <li class="nav-item{{ Request::is('admin') ? ' active' : '' }}">
+                                <a href="{{ route('back.users.index') }}" class="nav-link">ユーザー</a>
+                            </li>
+                        @endcan
                         <li class="nav-item">
                             <a href="#" class="nav-link" onClick="
                                 (function() {

@@ -11,6 +11,15 @@ use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
+    // タグの読み込み処理を共通にする
+    public function __construct()
+    {
+        $this->middleware(function ($request, \Closure $next) {
+            \View::share('tags', Tag::pluck('name', 'id')->toArray());
+            return $next($request);
+        })->only('index', 'create', 'edit');
+    }
+
     /**
      * Display a listing of the resource. 一覧画面
      *
@@ -18,7 +27,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('user')->latest('id')->paginate(20);
+        $posts = Post::with('user', 'tags')->latest('id')->paginate(20);
         return view('back.posts.index', compact('posts'));
     }
 

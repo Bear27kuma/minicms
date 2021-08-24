@@ -44,7 +44,7 @@ class Post extends Model
      * Tagのリレーション
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function tag()
+    public function tags()
     {
         return $this->belongsToMany(Tag::class);
     }
@@ -62,17 +62,18 @@ class Post extends Model
     /**
      * 公開記事一覧取得
      * @param Builder $query
-     * @return mixed
+     * @param string|null $tagSlug
+     * @return Builder
      */
-    public function scopePublicList(Builder $query, string $tagSlug = null)
+    public function scopePublicList(Builder $query, ?string $tagSlug)
     {
         if ($tagSlug) {
-            $query->whereHas('tags', function ($query) use ($tagSlug) {
+            $query->whereHas('tags', function($query) use ($tagSlug) {
                 $query->where('slug', $tagSlug);
             });
         }
-
         return $query
+            ->with('tags')
             ->public()
             ->latest('published_at')
             ->paginate(10);

@@ -19,10 +19,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+                    <li class="nav-item {{ Request::is('/') ? ' active' : '' }}">
                         <a href="{{ route('front.home') }}" class="nav-link">ホーム</a>
                     </li>
-                    <li class="nav-item {{ Request::is('posts', 'posts/*') ? 'active': '' }}">
+                    <li class="nav-item {{ Request::is('posts', 'posts/*') ? ' active': '' }}">
                         <a href="{{ route('front.posts.index') }}" class="nav-link">お知らせ</a>
                     </li>
                 </ul>

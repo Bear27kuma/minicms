@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
@@ -28,7 +29,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('back.posts.create');
+        $tags = Tag::pluck('name', 'id')->toArray();
+        return view('back.posts.create', compact('tags'));
     }
 
     /**
@@ -71,7 +73,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('back.posts.edit', compact('post'));
+        $tags = Tag::pluck('name', 'id')->toArray();
+        return view('back.posts.edit', compact('post', 'tags'));
     }
 
     /**

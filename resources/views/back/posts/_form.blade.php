@@ -29,6 +29,25 @@
 </div>
 
 <div class="form-group row">
+    {!! Form::label('tags', 'タグ', ['class' => 'col-sm-2 control-label']) !!}
+    <div class="col-sm-10">
+        <div class="{{ $errors->has('tags.*') ? 'is-invalid' : '' }}">
+            @foreach ($tags as $key => $tag)
+                <div class="form-check form-check-inline">
+                    {!! Form::checkbox('tags[]', $key, null, ['class' => 'form-check-input', 'id' => 'tag'.$key]) !!}
+                    <label for="tag{{ $key }}" class="form-check-label">{{ $tag }}</label>
+                </div>
+                @error('tags.*')
+                    <span class="invalid-feedback" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
+            @endforeach
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
     {{ Form::label('is_public', 'ステータス', ['class' => 'col-sm-2 col-form-label']) }}
     <div class="col-sm-10">
         @foreach([1 => '公開', 0 => '非公開'] as $key => $value)
